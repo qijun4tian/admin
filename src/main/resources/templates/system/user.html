@@ -75,6 +75,33 @@
                 showEditModel();
             });
             
+            
+            // 工具条点击事件
+            table.on('tool(user-table)', function (obj) {
+            	console.log(obj);
+                var data = obj.data;
+                var layEvent = obj.event;
+
+                if (layEvent === 'edit') { // 修改
+                    showEditModel(data);
+                } else if (layEvent === 'reset') { // 重置密码
+                    layer.confirm('确定重置此用户的密码吗？', function (i) {
+                        layer.close(i);
+                        layer.load(2);
+                        $.post('/system/user/restPsw', {
+                            userId: obj.data.userId
+                        }, function (data) {
+                            layer.closeAll('loading');
+                            if (data.code == 200) {
+                                layer.msg(data.msg, {icon: 1});
+                            } else {
+                                layer.msg(data.msg, {icon: 2});
+                            }
+                        });
+                    });
+                }
+            });
+            
             // 显示表单弹窗
             var showEditModel = function (data) {
                 var title = data ? '修改用户' : '添加用户';

@@ -71,12 +71,33 @@ public class UserController extends BaseController {
     }
     
     @ResponseBody
+    @RequestMapping("/update")
+    public JsonResult update(User user, String roleId) {
+        user.setRoles(getRoles(roleId));
+        if (userService.update(user)) {
+            return JsonResult.ok("修改成功");
+        } else {
+            return JsonResult.error("修改失败");
+        }
+    }
+    
+    @ResponseBody
     @RequestMapping("/updateState")
     public JsonResult updateState(Integer userId, Integer state) {
         if (userService.updateState(userId, state)) {
             return JsonResult.ok();
         } else {
             return JsonResult.error();
+        }
+    }
+    
+    @ResponseBody
+    @RequestMapping("/restPsw")
+    public JsonResult resetPsw(Integer userId) {
+        if (userService.updatePsw(userId,"123456")) {
+            return JsonResult.ok("重置成功");
+        } else {
+            return JsonResult.error("重置失败");
         }
     }
     

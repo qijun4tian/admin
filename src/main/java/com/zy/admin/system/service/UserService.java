@@ -84,6 +84,21 @@ public class UserService {
         return rs;
     }
     
+    @Transactional(rollbackFor = Exception.class)
+    public boolean update(User user) {
+        user.setUsername(null);
+        boolean rs = userMapper.updateById(user) > 0;
+        if (rs) {
+            userRoleMapper.delete(new EntityWrapper().eq("user_id", user.getUserId()));
+            List<Integer> roleIds = getRoleIds(user.getRoles());
+            if (userRoleMapper.insertBatch(user.getUserId(), roleIds) < roleIds.size()) {
+                throw new BusinessException("修改失败，请重试");
+            }
+        }
+        return rs;
+    }
+
+    
     
     public boolean updateState(Integer userId, int state) throws ParameterException {
         if (state != 0 && state != 1) {
@@ -94,8 +109,20 @@ public class UserService {
         user.setState(state);
         return userMapper.updateById(user) > 0;
     }
-
     
+    
+  
+    public boolean updatePsw(Integer userId,String password) {
+        User user = new User();
+        user.setUserId(userId);
+        String finalSecret = "{bcrypt}" + new BCryptPasswordEncoder().encode(password);
+        user.setPassword(finalSecret);
+        return userMapper.updateById(user) > 0;
+    }
+
+    public User getById(Integer userId) {
+        return userMapper.selectById(userId);
+    }
     
     private List<Integer> getUserIds(List<User> userList) {
         List<Integer> userIds = new ArrayList<>();
