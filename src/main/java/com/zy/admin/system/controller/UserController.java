@@ -18,6 +18,11 @@ import com.zy.admin.system.utils.StringUtil;
 import com.zy.admin.system.utils.results.JsonResult;
 import com.zy.admin.system.utils.results.PageResult;
 
+/**
+ * 
+ * @author zy 
+ * @date 2018-08-18 16:58
+ */
 @Controller
 @RequestMapping("/system/user")
 public class UserController extends BaseController {

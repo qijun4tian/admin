@@ -1,4 +1,4 @@
-package com.zy.admin.system.service;
+package com.zy.admin.system.security.service;
 
 
 import java.util.Collection;
@@ -17,8 +17,13 @@ import org.springframework.stereotype.Component;
 import com.zy.admin.system.model.Authorities;
 import com.zy.admin.system.model.User;
 import com.zy.admin.system.repository.UserMapper;
+import com.zy.admin.system.service.AuthoritiesService;
 import com.zy.admin.system.utils.StringUtil;
-
+/**
+ * 
+ * @author zy 
+ * @date 2018-08-18 16:59
+ */
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {
 

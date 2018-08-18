@@ -19,6 +19,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
+/**
+ * 
+ * @author zy 
+ * @date 2018-08-18 16:57
+ */
 public class ZyAuthenticationSuccessHandler  extends SimpleUrlAuthenticationSuccessHandler{
 	
 	@Autowired

@@ -8,7 +8,7 @@ import com.zy.admin.system.model.User;
 /**
  * 安全工具类
  *
- * @author L.cm
+ * @author zy
  */
 public class SecurityUtils {
 

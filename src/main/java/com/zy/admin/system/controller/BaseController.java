@@ -4,7 +4,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.zy.admin.system.model.User;
-
+/**
+ * 
+ * @author zy 
+ * @date 2018-08-18 16:58
+ */
 public class BaseController {
 	
 	public User getLoginUser(){

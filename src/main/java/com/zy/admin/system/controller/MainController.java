@@ -16,6 +16,11 @@ import com.zy.admin.system.security.support.SecurityUtils;
 import com.zy.admin.system.service.AuthoritiesService;
 import com.zy.admin.system.utils.StringUtil;
 
+/**
+ * 
+ * @author zy 
+ * @date 2018-08-18 16:58
+ */
 @Controller
 public class MainController extends BaseController {
 
@@ -42,7 +47,7 @@ public class MainController extends BaseController {
 		return "login";
 	}
 
-	@GetMapping("me")
+	@GetMapping("/me")
 	@ResponseBody
 	public Object me() {
 		return SecurityUtils.getAuthentication();

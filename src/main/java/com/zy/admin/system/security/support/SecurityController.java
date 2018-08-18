@@ -21,6 +21,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
+/**
+ * 
+ * @author zy 
+ * @date 2018-08-18 16:57
+ */
 public class SecurityController {
 
 	private RequestCache requestCache = new HttpSessionRequestCache();

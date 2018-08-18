@@ -15,11 +15,12 @@ import com.zy.admin.system.model.User;
 import com.zy.admin.system.utils.StringUtil;
 
 /**
+ * 
+ * @author zy 
+ * @date 2018-08-18 16:57
  * 权限判断
  *
  * url: https://stackoverflow.com/questions/41434231/use-spring-security-in-thymeleaf-escaped-expressions-in-javascript
- *
- * @author l.cm
  */
 @Service("sec")
 public class SecService {
@@ -50,6 +51,7 @@ public class SecService {
 		if (authorities.isEmpty()) {
 			return false;
 		}
+		//Todo 
 		return true;
 	}
 
