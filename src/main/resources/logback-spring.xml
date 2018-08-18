@@ -59,7 +59,7 @@
 	</appender>
 	
 	
-	<logger name="com.shz.appletsapi.filter.RequestLoggingFilter" level="INFO">
+	<logger name="com.zy.admin.system.config.support.filter.RequestLoggingFilter" level="INFO">
 		<appender-ref ref="web-access-appender" />
 	</logger>
 	
