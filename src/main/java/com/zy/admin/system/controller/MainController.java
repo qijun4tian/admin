@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zy.admin.system.model.Authorities;
+import com.zy.admin.system.security.support.SecurityUtils;
 import com.zy.admin.system.service.AuthoritiesService;
 import com.zy.admin.system.utils.StringUtil;
 
@@ -44,7 +45,7 @@ public class MainController extends BaseController {
 	@GetMapping("me")
 	@ResponseBody
 	public Object me() {
-		return getLoginUser();
+		return SecurityUtils.getAuthentication();
 	}
 
 	/**

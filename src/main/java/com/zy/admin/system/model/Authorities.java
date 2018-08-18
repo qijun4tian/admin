@@ -5,12 +5,19 @@ import com.baomidou.mybatisplus.annotations.TableName;
 
 import java.util.Date;
 
+import org.springframework.security.core.GrantedAuthority;
+
 /**
  * 权限表
  */
 @TableName("sys_authorities")
-public class Authorities {
-    @TableId
+public class Authorities  implements GrantedAuthority{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2981436160259203394L;
+
+	@TableId
     private Integer authorityId;  // 权限id
 
     private String authorityName;  // 权限名称

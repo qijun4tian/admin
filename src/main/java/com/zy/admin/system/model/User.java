@@ -45,7 +45,8 @@ public class User implements UserDetails {
     @TableField(exist = false)
     private List<Role> roles;  //角色
     
-    
+    @TableField(exist = false)
+    private Collection<? extends GrantedAuthority> authorities;  //权限
     
 
     public List<Role> getRoles() {
@@ -151,8 +152,17 @@ public class User implements UserDetails {
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
     }
+    
+    
+    
 
-    @Override
+  
+
+	public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+		this.authorities = authorities;
+	}
+
+	@Override
     public String getPassword() {
         return this.password;
     }
@@ -185,6 +195,6 @@ public class User implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		return AuthorityUtils.commaSeparatedStringToAuthorityList("admin");
+		return  this.authorities;
 	}
 }

@@ -3,6 +3,7 @@ package com.zy.admin.system.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +47,7 @@ public class UserController extends BaseController {
 
 	@ResponseBody
 	@RequestMapping("/list")
+	@PreAuthorize("@sec.hasPermission('user:view')")
 	public PageResult<User> list(Integer page, Integer limit, String searchKey, String searchValue) {
 		if (page == null) {
 			page = 0;
