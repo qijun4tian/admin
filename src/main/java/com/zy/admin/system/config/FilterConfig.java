@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import com.zy.admin.system.config.support.filter.RequestLoggingFilter;
 
 @Configuration
-public class FilterConfiguration {
+public class FilterConfig {
 	
 	
 	RequestLoggingFilter rquestLogginFilter() {

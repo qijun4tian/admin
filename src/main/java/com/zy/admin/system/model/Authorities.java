@@ -1,21 +1,17 @@
 package com.zy.admin.system.model;
 
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-
 import java.util.Date;
 
-import org.springframework.security.core.GrantedAuthority;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
 
 /**
  * 权限表
  */
 @TableName("sys_authorities")
-public class Authorities  implements GrantedAuthority{
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -2981436160259203394L;
+public class Authorities  {
+ 
+
 
 	@TableId
     private Integer authorityId;  // 权限id
