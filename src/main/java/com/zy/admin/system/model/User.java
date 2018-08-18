@@ -2,11 +2,13 @@ package com.zy.admin.system.model;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 
@@ -40,8 +42,21 @@ public class User implements UserDetails {
 
     private Date updateTime;
 
+    @TableField(exist = false)
+    private List<Role> roles;  //角色
+    
+    
+    
 
-    public Integer getUserId() {
+    public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
+	}
+
+	public Integer getUserId() {
         return userId;
     }
 

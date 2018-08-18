@@ -38,3 +38,62 @@
     <input type="checkbox" lay-filter="user-tpl-state" value="{{d.userId}}" lay-skin="switch" lay-text="正常|锁定"
            {{d.state==0?'checked':''}}/>
 </script>
+<script>
+    layui.use(['form', 'table', 'util', 'admin', 'element'], function () {
+            var form = layui.form;
+            var table = layui.table;
+            var layer = layui.layer;
+            var util = layui.util;
+            var admin = layui.admin;
+            var element = layui.element;
+
+         // 渲染表格
+            table.render({
+                elem: '#user-table',
+                url: '/system/user/list',
+                page: true,
+                cols: [
+                	[
+                    {type: 'numbers'},
+                    {field: 'username', sort: true, title: '账号'},
+                    {field: 'nickName', sort: true, title: '用户名'},
+                    {field: 'phone', sort: true, title: '手机号'},
+                    {field: 'sex', sort: true, title: '性别'},
+                    {
+                        sort: true, templet: function (d) {
+                            return util.toDateString(d.createTime);
+                        }, title: '创建时间'
+                    },
+                    {field: 'state', sort: true, templet: '#user-tpl-state', title: '状态'},
+                    {align: 'center', toolbar: '#user-table-bar', title: '操作'}
+                ]
+                	]
+            });
+         
+            // 添加按钮点击事件
+            $('#user-btn-add').click(function () {
+                showEditModel();
+            });
+            
+            // 显示表单弹窗
+            var showEditModel = function (data) {
+                var title = data ? '修改用户' : '添加用户';
+                admin.putTempData('t_user', data);
+                admin.popupCenter({
+                    title: title,
+                    path: '/system/user/editForm',
+                    finish: function () {
+                        table.reload('user-table', {});
+                    }
+                });
+            };
+            
+            // 搜索按钮点击事件
+            $('#user-btn-search').click(function () {
+                var key = $('#user-search-key').val();
+                var value = $('#user-search-value').val();
+                table.reload('user-table', {where: {searchKey: key, searchValue: value}});
+            });
+         
+            });
+    </script> 
