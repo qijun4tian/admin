@@ -70,6 +70,16 @@ public class UserController extends BaseController {
         }
     }
     
+    @ResponseBody
+    @RequestMapping("/updateState")
+    public JsonResult updateState(Integer userId, Integer state) {
+        if (userService.updateState(userId, state)) {
+            return JsonResult.ok();
+        } else {
+            return JsonResult.error();
+        }
+    }
+    
     
     private List<Role> getRoles(String roleStr) {
         List<Role> roles = new ArrayList<>();

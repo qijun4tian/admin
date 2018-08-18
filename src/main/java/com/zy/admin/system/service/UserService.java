@@ -12,6 +12,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.zy.admin.system.exception.BusinessException;
+import com.zy.admin.system.exception.ParameterException;
 import com.zy.admin.system.model.Role;
 import com.zy.admin.system.model.User;
 import com.zy.admin.system.model.UserRole;
@@ -82,6 +83,18 @@ public class UserService {
         }
         return rs;
     }
+    
+    
+    public boolean updateState(Integer userId, int state) throws ParameterException {
+        if (state != 0 && state != 1) {
+            throw new ParameterException("state值需要在[0,1]中");
+        }
+        User user = new User();
+        user.setUserId(userId);
+        user.setState(state);
+        return userMapper.updateById(user) > 0;
+    }
+
     
     
     private List<Integer> getUserIds(List<User> userList) {

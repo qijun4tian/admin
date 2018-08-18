@@ -94,6 +94,25 @@
                 var value = $('#user-search-value').val();
                 table.reload('user-table', {where: {searchKey: key, searchValue: value}});
             });
+            
+            // 修改user状态
+            form.on('switch(user-tpl-state)', function (obj) {
+                layer.load(2);
+                $.post('/system/user/updateState', {
+                    userId: obj.elem.value,
+                    state: obj.elem.checked ? 0 : 1
+                }, function (data) {
+                    layer.closeAll('loading');
+                    if (data.code == 200) {
+                        layer.msg(data.msg, {icon: 1});
+                        //table.reload('table-user', {});
+                    } else {
+                        layer.msg(data.msg, {icon: 2});
+                        $(obj.elem).prop('checked', !obj.elem.checked);
+                        form.render('checkbox');
+                    }
+                });
+            });
          
             });
     </script> 
