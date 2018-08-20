@@ -31,7 +31,7 @@ public class SessionValidateCodeRepository implements ValidateCodeRepository {
 	@Override
 	public void save(ServletWebRequest request, ValidateCode validateCode,ValidateCodeType type) {
 		// TODO Auto-generated method stub
-		log.info("构建验证码放入session时的key:"+type.toString().toUpperCase());
+		log.debug("构建验证码放入session时的key:"+type.toString().toUpperCase());
 		sessionStrategy.setAttribute(request,getSessionKey(type),validateCode);
 
 	}

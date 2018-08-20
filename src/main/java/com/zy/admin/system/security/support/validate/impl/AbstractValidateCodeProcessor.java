@@ -120,7 +120,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
 	 * @return
 	 */
 	private ValidateCodeType getValidateCodeType(ServletWebRequest request) {
-	    log.info(getClass().getSimpleName());
+	    log.debug(getClass().getSimpleName());
 		String type = StringUtils.substringBefore(getClass().getSimpleName(), "CodeProcessor");
 		return ValidateCodeType.valueOf(type.toUpperCase());
 	}

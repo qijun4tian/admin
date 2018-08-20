@@ -20,7 +20,7 @@ public class ImageCodeProcessor extends
 	protected void send(ServletWebRequest request, ImageCode validateCode)
 			throws Exception {
 		// TODO Auto-generated method stub
-		log.info("图形验证码" + validateCode.getCode());
+		log.debug("图形验证码" + validateCode.getCode());
 		ImageIO.write(validateCode.getImage(), "JPEG", request.getResponse()
 				.getOutputStream());
 	}

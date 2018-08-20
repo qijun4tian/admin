@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,10 +31,14 @@ public class UserController extends BaseController {
 
 	private final RoleService roleService;
 	private final UserService userService;
+	private final PasswordEncoder passwordEncoder;
 
-	public UserController(RoleService roleService, UserService userService) {
+
+
+	public UserController(RoleService roleService, UserService userService, PasswordEncoder passwordEncoder) {
 		this.roleService = roleService;
 		this.userService = userService;
+		this.passwordEncoder = passwordEncoder;
 	}
 
 	@RequestMapping
@@ -133,12 +138,14 @@ public class UserController extends BaseController {
     @ResponseBody
     @RequestMapping("/updatePsw")
     public JsonResult updatePsw(String oldPsw, String newPsw) {
-        if ("admin".equals(getLoginUser().getUsername())) {
+      /*  if ("admin".equals(getLoginUser().getUsername())) {
             return JsonResult.error("演示账号admin关闭该功能");
-        }
+        }*/
         
-        String finalSecret = "{bcrypt}" + new BCryptPasswordEncoder().encode(oldPsw);
-        if (!finalSecret.equals(getLoginUser().getPassword())) {
+    	//new BCryptPasswordEncoder().matches(rawPassword, encodedPassword)
+    	
+
+        if (!passwordEncoder.matches(oldPsw,getLoginUser().getPassword())) {
             return JsonResult.error("原密码输入不正确");
         }
         if (userService.updatePsw(getLoginUserId(), newPsw)) {
