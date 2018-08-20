@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -124,6 +125,27 @@ public class UserController extends BaseController {
             roles.add(new Role(Integer.parseInt(t)));
         }
         return roles;
+    }
+    
+    /**
+     * 修改自己密码
+     **/
+    @ResponseBody
+    @RequestMapping("/updatePsw")
+    public JsonResult updatePsw(String oldPsw, String newPsw) {
+        if ("admin".equals(getLoginUser().getUsername())) {
+            return JsonResult.error("演示账号admin关闭该功能");
+        }
+        
+        String finalSecret = "{bcrypt}" + new BCryptPasswordEncoder().encode(oldPsw);
+        if (!finalSecret.equals(getLoginUser().getPassword())) {
+            return JsonResult.error("原密码输入不正确");
+        }
+        if (userService.updatePsw(getLoginUserId(), newPsw)) {
+            return JsonResult.ok("修改成功");
+        } else {
+            return JsonResult.error("修改失败");
+        }
     }
 	
 

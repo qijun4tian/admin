@@ -9,8 +9,11 @@ import com.zy.admin.system.security.support.validate.ValidateCode;
 import com.zy.admin.system.security.support.validate.ValidateCodeRepository;
 import com.zy.admin.system.security.support.validate.ValidateCodeType;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 @Component
+@Slf4j
 public class SessionValidateCodeRepository implements ValidateCodeRepository {
 	
 	
@@ -28,7 +31,7 @@ public class SessionValidateCodeRepository implements ValidateCodeRepository {
 	@Override
 	public void save(ServletWebRequest request, ValidateCode validateCode,ValidateCodeType type) {
 		// TODO Auto-generated method stub
-		System.out.println("构建验证码放入session时的key:"+type.toString().toUpperCase());
+		log.info("构建验证码放入session时的key:"+type.toString().toUpperCase());
 		sessionStrategy.setAttribute(request,getSessionKey(type),validateCode);
 
 	}
