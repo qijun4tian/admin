@@ -15,6 +15,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zy.admin.system.security.support.validate.ValidateCodeException;
 import com.zy.admin.system.utils.results.JsonResult;
 
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +40,8 @@ public class ZyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailu
 			 result.setMessage("账号或密码错误");
 		 }else if(exception instanceof LockedException) {
 			 result.setMessage("账号被锁定");
-			
+		 }else if(exception instanceof ValidateCodeException) {
+			 result.setMessage(exception.getMessage());
 		 }
 		response.setStatus(HttpStatus.OK.value());
 		response.setContentType("application/json;charset=UTF-8");
