@@ -152,15 +152,12 @@ public class User implements UserDetails {
         this.updateTime = updateTime;
     }
     
-    
-    
-
-  
-
 	public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
 		this.authorities = authorities;
 	}
 
+	
+	
 	@Override
     public String getPassword() {
         return this.password;
@@ -196,4 +193,33 @@ public class User implements UserDetails {
 		// TODO Auto-generated method stub
 		return  this.authorities;
 	}
+
+	@Override
+	public boolean equals(Object rhs) {
+		if (rhs instanceof User) {
+			return username.equals(((User) rhs).username);
+		}
+		return false;
+	}
+
+	/**
+	 * Returns the hashcode of the {@code username}.
+	 */
+	@Override
+	public int hashCode() {
+		return username.hashCode();
+	}
+
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", nickName=" + nickName
+				+ ", avatar=" + avatar + ", sex=" + sex + ", phone=" + phone + ", email=" + email + ", emailVerified="
+				+ emailVerified + ", personId=" + personId + ", state=" + state + ", createTime=" + createTime
+				+ ", updateTime=" + updateTime + ", roles=" + roles + ", authorities=" + authorities + "]";
+	}
+	
+	
+	
+	
+	
 }

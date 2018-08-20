@@ -12,6 +12,8 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.session.InvalidSessionStrategy;
+import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
 import com.zy.admin.system.security.support.validate.ValidateCodeSecurityConfig;
 
@@ -32,6 +34,13 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private ValidateCodeSecurityConfig validateCodeSecurityConfig;
 	
+	@Autowired
+	private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
+	
+	@Autowired
+	private InvalidSessionStrategy invalidSessionStrategy;
+	
+	
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -48,11 +57,6 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		  .logoutSuccessUrl("/login")
 		  .deleteCookies("JSESSIONID")
 		.and()
-		.sessionManagement()
-		  .maximumSessions(1)
-		  .maxSessionsPreventsLogin(false)
-		.and()
-		.and()
 		  .userDetailsService(userDetailsService)
 		  .authorizeRequests()
 		  .antMatchers("/login").permitAll()
@@ -60,7 +64,14 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		  .antMatchers("/code/*").permitAll()
 		  .anyRequest()
 		  .authenticated()
-		  .and()
+		.and()
+		  .sessionManagement()
+		 .invalidSessionStrategy(invalidSessionStrategy)
+		  .maximumSessions(1)
+		  .maxSessionsPreventsLogin(false)
+		  .expiredSessionStrategy(sessionInformationExpiredStrategy)
+		.and()
+		.and()
 		  .csrf().disable();
 		
 	}
