@@ -79,9 +79,7 @@
            <dd th:each="subMenu : ${menu.subMenus}">
              <a th:lay-href="${subMenu.menuUrl}">[[${subMenu.menuName}]]</a>
               <dl class="layui-nav-child" th:if="${subMenu.subMenus.size()} > 0">
-              <dd th:each="temp : ${subMenu.subMenus}">
-               <a th:lay-href="${temp.menuUrl}">[[${temp.menuName}]]</a>
-              </dd>
+              <dd th:each="temp : ${subMenu.subMenus}"><a th:lay-href="${temp.menuUrl}">[[${temp.menuName}]]</a></dd>
               </dl>
            </dd>
          </dl>

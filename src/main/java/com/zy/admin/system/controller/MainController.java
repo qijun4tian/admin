@@ -37,6 +37,7 @@ public class MainController extends BaseController {
 	public String index(Model model) {
 		List<Authorities> authorities = authoritiesService.listByUserId(getLoginUserId());
 	    List<Map<String, Object>> menuTree = getMenuTree(authorities, -1);
+	    System.out.println(menuTree);
         model.addAttribute("menus", menuTree);
 		model.addAttribute("loginUser", getLoginUser());
 		return "system/index";
