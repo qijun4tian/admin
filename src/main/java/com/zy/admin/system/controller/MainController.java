@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,6 +55,13 @@ public class MainController extends BaseController {
 		return SecurityUtils.getAuthentication();
 	}
 
+    @RequestMapping("/iframe")
+    public String error(String url, Model model,HttpServletResponse response) {
+        model.addAttribute("url", url);
+        return "system/tpl/iframe";
+    }
+
+	
 	/**
 	 * 递归转化树形菜单
 	 */
