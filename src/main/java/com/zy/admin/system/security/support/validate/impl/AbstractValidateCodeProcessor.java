@@ -84,7 +84,7 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
 		}
 
 		if (!StringUtils.equalsIgnoreCase(codeInSession.getCode(), codeInRequest)) {
-			throw new ValidateCodeException(processorType + "验证码不匹配"+"|"+codeInSession.getCode()+"|"+codeInRequest);
+			throw new ValidateCodeException(processorType + "验证码不匹配");
 		}
 
 		validateCodeRepository.remove(request,processorType);

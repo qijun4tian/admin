@@ -1,3 +1,8 @@
+#简介
+
+&emsp;前后端不分离版本项目地址：[easyweb-shiro](https://gitee.com/whvse/easyweb-shiro)，
+仿造这项目 把权限框架由shiro 换成了Spring Security 模板引擎换由beetl 换成了thymeleaf
+
 ### zy-admin
 描述 | 框架 
 :---|:---
@@ -16,7 +21,7 @@ UI框架 | LayUi
 
 - ~~权限精确到按钮~~
 
-- 图形验证码/手机验证码登录/ 第三方登录
+- ~~图形验证码/手机验证码登录/ 第三方登录~~ 暂时只做图形验证码
 
 - 框架重构/session处理/
 
