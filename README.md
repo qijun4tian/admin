@@ -23,11 +23,11 @@ UI框架 | LayUi
 
 - ~~图形验证码/手机验证码登录/ 第三方登录~~ 暂时只做图形验证码
 
-- 框架重构/session处理/
+- ~~框架重构/session处理/~~
 
-- 重构首页熟悉thymeleaf~
+- ~~重构首页熟悉thymeleaf~~
 
-- 角色管理 /权限管理/登入日志/demo列表/掌握mybatisPlus/掌握layui
+- ~~角色管理 /权限管理/登入日志/demo列表/掌握mybatisPlus/掌握layui~~
 
 - 系统监控
 
