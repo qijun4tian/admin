@@ -36,6 +36,7 @@ public class UserController extends BaseController {
 	}
 
 	@RequestMapping
+	@PreAuthorize("@sec.hasPermission('user:view')")
 	public String user(Model model) {
 		List<Role> roles = roleService.list(false);
 		model.addAttribute("roles", roles);
@@ -67,6 +68,7 @@ public class UserController extends BaseController {
 	
     @ResponseBody
     @RequestMapping("/add")
+    @PreAuthorize("@sec.hasPermission('user:add')")
     public JsonResult add(User user, String roleId) {
         user.setRoles(getRoles(roleId));
         user.setPassword("123456");
@@ -79,6 +81,7 @@ public class UserController extends BaseController {
     
     @ResponseBody
     @RequestMapping("/update")
+    @PreAuthorize("@sec.hasPermission('user:edit')")
     public JsonResult update(User user, String roleId) {
         user.setRoles(getRoles(roleId));
         if (userService.update(user)) {
@@ -90,6 +93,7 @@ public class UserController extends BaseController {
     
     @ResponseBody
     @RequestMapping("/updateState")
+    @PreAuthorize("@sec.hasPermission('user:delete')")
     public JsonResult updateState(Integer userId, Integer state) {
         if (userService.updateState(userId, state)) {
             return JsonResult.ok();
@@ -100,6 +104,7 @@ public class UserController extends BaseController {
     
     @ResponseBody
     @RequestMapping("/restPsw")
+    @PreAuthorize("@sec.hasPermission('user:edit')")
     public JsonResult resetPsw(Integer userId) {
         if (userService.updatePsw(userId,"123456")) {
             return JsonResult.ok("重置成功");
