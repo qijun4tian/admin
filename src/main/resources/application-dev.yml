@@ -57,6 +57,7 @@ server:
 logging:
   path: ./log
   level:
+    com.zy.admin.business.repository: DEBUG
     root: INFO  
 
 shz:
