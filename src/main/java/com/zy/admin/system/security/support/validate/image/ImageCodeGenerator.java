@@ -9,20 +9,22 @@ import java.util.Random;
 
 import org.springframework.web.context.request.ServletWebRequest;
 
+import com.zy.admin.system.config.support.properties.ShzProperties;
 import com.zy.admin.system.security.support.validate.ValidateCodeGenerator;
 
 public class ImageCodeGenerator implements ValidateCodeGenerator {
 
 	private Font font = new Font("Verdana", Font.ITALIC | Font.BOLD, 28); // 字体
-	private int width = 150; // 验证码显示跨度
-	private int height = 40; // 验证码显示高度
-	private int lenght = 4;  //长度
+	
+	private ShzProperties shzProperties;
 
 	@Override
 	public ImageCode generator(ServletWebRequest req) {
+		int width = shzProperties.getSecurity().getImageCode().getWidth();
+		int height= shzProperties.getSecurity().getImageCode().getHeight();
 
 		char[] strs = alphas();
-		BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		BufferedImage bi = new BufferedImage(width,height, BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = (Graphics2D) bi.getGraphics();
 		AlphaComposite ac3;
 		Color color;
@@ -50,7 +52,7 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
 			color = null;
 			ac3 = null;
 		}
-		return new ImageCode(bi, sRand, 1);
+		return new ImageCode(bi, sRand, shzProperties.getSecurity().getImageCode().getExpireIn());
 	}
 
 	private Color color(int fc, int bc) {
@@ -99,8 +101,8 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
 	}
 
 	public char[] alphas() {
-		char[] cs = new char[lenght];
-		for (int i = 0; i < lenght; i++) {
+		char[] cs = new char[shzProperties.getSecurity().getImageCode().getLength()];
+		for (int i = 0; i < shzProperties.getSecurity().getImageCode().getLength(); i++) {
 			cs[i] = alpha();
 		}
 		String chars = new String(cs);

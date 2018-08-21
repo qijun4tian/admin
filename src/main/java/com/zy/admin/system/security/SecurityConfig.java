@@ -15,6 +15,8 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
+import com.zy.admin.system.config.support.properties.SecurityConstants;
+import com.zy.admin.system.config.support.properties.ShzProperties;
 import com.zy.admin.system.security.support.validate.ValidateCodeSecurityConfig;
 
 @Configuration
@@ -40,6 +42,9 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private InvalidSessionStrategy invalidSessionStrategy;
 	
+	@Autowired
+	private ShzProperties shzProperties;
+	
 	
 	
 	@Override
@@ -48,18 +53,18 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		.apply(validateCodeSecurityConfig)
 		.and()
 		  .formLogin()
-		  .loginPage("/login")
-		  .loginProcessingUrl("/authentication/form")
+		  .loginPage(SecurityConstants.DEFAULT_LOGIN_PAGE)
+		  .loginProcessingUrl(SecurityConstants.DEFAULT_SIGN_IN_PROCESSING_URL_FORM)
 		  .successHandler(zyAuthenticationSuccessHandler)
 		  .failureHandler(zyAuthenticationFailureHandler)
 		.and()
 		  .logout()
-		  .logoutSuccessUrl("/login")
+		  .logoutSuccessUrl(SecurityConstants.DEFAULT_LOGIN_PAGE)
 		  .deleteCookies("JSESSIONID")
 		.and()
 		  .userDetailsService(userDetailsService)
 		  .authorizeRequests()
-		  .antMatchers("/login").permitAll()
+		  .antMatchers(SecurityConstants.DEFAULT_LOGIN_PAGE).permitAll()
 		  .antMatchers("/static/**").permitAll()
 		  .antMatchers("/code/*").permitAll()
 		  .antMatchers("/druid/**").permitAll()
@@ -68,8 +73,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		.and()
 		  .sessionManagement()
 		  .invalidSessionStrategy(invalidSessionStrategy)
-		  .maximumSessions(1)
-		  .maxSessionsPreventsLogin(false)
+		  .maximumSessions(shzProperties.getSecurity().getSession().getMaximumSessions())
+		  .maxSessionsPreventsLogin(shzProperties.getSecurity().getSession().isMaxSessionsPreventsLogin())
 		  .expiredSessionStrategy(sessionInformationExpiredStrategy)
 		.and()
 		.and()
