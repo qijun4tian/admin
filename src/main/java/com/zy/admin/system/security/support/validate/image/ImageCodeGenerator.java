@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import com.zy.admin.system.config.support.properties.ShzProperties;
@@ -16,7 +17,7 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
 
 	private Font font = new Font("Verdana", Font.ITALIC | Font.BOLD, 28); // 字体
 	
-	@Deprecated
+	@Autowired
 	private ShzProperties shzProperties;
 
 	@Override

@@ -59,6 +59,9 @@ logging:
   level:
     root: INFO  
 
-
+shz:
+  security:
+    imageCode:
+      length: 4 
  
     
