@@ -16,6 +16,7 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
 
 	private Font font = new Font("Verdana", Font.ITALIC | Font.BOLD, 28); // 字体
 	
+	@Deprecated
 	private ShzProperties shzProperties;
 
 	@Override

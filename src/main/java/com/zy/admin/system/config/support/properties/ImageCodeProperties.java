@@ -8,7 +8,6 @@ import lombok.Data;
 @Data
 public class ImageCodeProperties {
 
-
 	private int width = 150;
 	
 	private int height = 40;
