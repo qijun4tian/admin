@@ -23,7 +23,7 @@ public class ZyInformationSessionStrategy implements SessionInformationExpiredSt
 	@Override
 	public void onExpiredSessionDetected(SessionInformationExpiredEvent event) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		log.info("session已经失效可能是并发登录");
+		log.debug("session已经失效可能是并发登录");
 		 JsonResult result =new JsonResult();
 		 result.setCode(401);
 		 result.setMessage("session已经失效由于并发登录"+"|请联系管理员");

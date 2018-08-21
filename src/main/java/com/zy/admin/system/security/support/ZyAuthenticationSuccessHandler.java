@@ -39,7 +39,7 @@ public class ZyAuthenticationSuccessHandler  extends SimpleUrlAuthenticationSucc
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-	     log.info("登入成功");
+	     log.debug("登入成功");
 	     addLoginRecord(SecurityUtils.getUser().getUserId(),request);
 		 JsonResult result =new JsonResult();
 		 result.setCode(200);

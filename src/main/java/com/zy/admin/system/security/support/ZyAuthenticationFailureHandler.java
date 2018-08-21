@@ -33,7 +33,7 @@ public class ZyAuthenticationFailureHandler extends SimpleUrlAuthenticationFailu
 			AuthenticationException exception) throws IOException, ServletException {
 		//LockedException 用户被绑定
 		//BadCredentialsException 坏的凭证
-		 log.info("登录失败:"+exception.getMessage()+"|"+exception.getClass());
+		 log.debug("登录失败:"+exception.getMessage()+"|"+exception.getClass());
 		 JsonResult result =new JsonResult();
 		 result.setCode(400);
 		 if (exception instanceof BadCredentialsException) {

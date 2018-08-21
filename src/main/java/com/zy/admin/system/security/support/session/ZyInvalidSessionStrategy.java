@@ -24,7 +24,7 @@ public class ZyInvalidSessionStrategy implements InvalidSessionStrategy {
 	@Override
 	public void onInvalidSessionDetected(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
-		log.info("session已经失效可能是超时了");
+		log.debug("session已经失效可能是超时了");
 		 JsonResult result =new JsonResult();
 		 result.setCode(401);
 		 result.setMessage("session已经失效由于超时了");
