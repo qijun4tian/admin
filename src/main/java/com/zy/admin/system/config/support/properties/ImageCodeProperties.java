@@ -16,5 +16,7 @@ public class ImageCodeProperties {
 	
 	private int expireIn = 1;
 	
+	private Boolean open = true;
+	
 
 }
