@@ -30,7 +30,7 @@ public class ZyInformationSessionStrategy implements SessionInformationExpiredSt
 		 event.getResponse().setStatus(HttpStatus.OK.value());
 		 event.getResponse().setContentType("application/json;charset=UTF-8");
 		 event.getResponse().getWriter().write(objectMapper.writeValueAsString(result));
-		event.getRequest().getSession();
+		 event.getRequest().getSession();
 		
 	}
 
