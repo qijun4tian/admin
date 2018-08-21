@@ -13,6 +13,9 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zy.admin.system.model.LoginRecord;
+import com.zy.admin.system.service.LoginRecordService;
+import com.zy.admin.system.utils.UserAgentGetter;
 import com.zy.admin.system.utils.results.JsonResult;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,18 +31,34 @@ public class ZyAuthenticationSuccessHandler  extends SimpleUrlAuthenticationSucc
 	
 	@Autowired
 	private ObjectMapper objectMapper;
+	
+	@Autowired
+	private LoginRecordService loginRecordService;
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 	     log.info("登入成功");
+	     addLoginRecord(SecurityUtils.getUser().getUserId(),request);
 		 JsonResult result =new JsonResult();
 		 result.setCode(200);
 		 result.setMessage("登录成功");
 		 response.setStatus(HttpStatus.OK.value());
 		 response.setContentType("application/json;charset=UTF-8");
-		 response.getWriter().write(objectMapper.writeValueAsString(result));
+		 response.getWriter().write(objectMapper.writeValueAsString(result)); 
 	}
+	
+    private void addLoginRecord(Integer userId, HttpServletRequest request) {
+        UserAgentGetter agentGetter = new UserAgentGetter(request);
+        // 添加到登录日志
+        LoginRecord loginRecord = new LoginRecord();
+        loginRecord.setUserId(userId);
+        loginRecord.setOsName(agentGetter.getOS());
+        loginRecord.setDevice(agentGetter.getDevice());
+        loginRecord.setBrowserType(agentGetter.getBrowser());
+        loginRecord.setIpAddress(agentGetter.getIpAddr());
+        loginRecordService.add(loginRecord);
+    }
 
 }
