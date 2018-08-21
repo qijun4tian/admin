@@ -1,7 +1,7 @@
 ## 简介
 
-&emsp;仿造这位大神项目：[easyweb-shiro](https://gitee.com/whvse/easyweb-shiro)，
-把权限框架由shiro 换成了Spring Security 模板引擎换由beetl 换成了thymeleaf
+&emsp;仿造@synchronized 这位大神项目：[easyweb-shiro](https://gitee.com/whvse/easyweb-shiro)，
+把权限框架重构了一遍把shiro 换成了Spring Security 模板引擎换由beetl 换成了thymeleaf
 
 ### zy-admin
 描述 | 框架 
