@@ -50,6 +50,9 @@ mybatis-plus:
 
 server:
   port: 8060
+  servlet:
+    session: 
+      timeout: 60*30
   
 logging:
   path: ./log

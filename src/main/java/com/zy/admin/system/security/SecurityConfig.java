@@ -67,13 +67,15 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		  .authenticated()
 		.and()
 		  .sessionManagement()
-		 .invalidSessionStrategy(invalidSessionStrategy)
+		  .invalidSessionStrategy(invalidSessionStrategy)
 		  .maximumSessions(1)
 		  .maxSessionsPreventsLogin(false)
 		  .expiredSessionStrategy(sessionInformationExpiredStrategy)
 		.and()
 		.and()
-		  .csrf().disable();
+		  .headers().frameOptions().disable()
+		.and()
+		   .csrf().disable();
 		
 	}
 	
