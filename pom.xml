@@ -131,7 +131,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>1.5.3.RELEASE</version>
 				<configuration>
-					<mainClass>com.shz.appletsapi.OAuthApplication</mainClass>
+					<mainClass>com.zy.admin.AdminApplication</mainClass>
 				</configuration>
 				<executions>
 					<execution>

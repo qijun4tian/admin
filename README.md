@@ -3,6 +3,10 @@
 &emsp;仿造@synchronized 这位大神项目：[easyweb-shiro](https://gitee.com/whvse/easyweb-shiro)，
 把权限框架重构了一遍把shiro 换成了Spring Security 模板引擎换由beetl 换成了thymeleaf
 
+
+* 演示地址：[http://47.104.207.245:9999/](http://47.104.207.245:9999/)
+* 演示账号：admin &emsp;&emsp; 密码：admin 
+
 ### zy-admin
 描述 | 框架 
 :---|:---
