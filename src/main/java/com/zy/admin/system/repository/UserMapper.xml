@@ -6,4 +6,10 @@
         select * from sys_user where username=#{username}
     </select>
     
+      <select id="selectByRoleId" resultType="com.zy.admin.system.model.User">
+      SELECT a.*  FROM sys_user a
+	  LEFT JOIN sys_user_role b ON a.user_id = b.user_id  WHERE b.role_id = #{roleId}
+     </select>
+     
+     
 </mapper>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -146,5 +147,10 @@ public class UserService {
         }
         return rs;
     }
+    
+    public List<User> selectByRoleId(Integer roleId){
+    	return userMapper.selectByRoleId(roleId);
+    }
+    
 	
 }

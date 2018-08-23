@@ -90,6 +90,7 @@ public class UserController extends BaseController {
     public JsonResult update(User user, String roleId) {
         user.setRoles(getRoles(roleId));
         if (userService.update(user)) {
+        	invalidateSession(userService.getById(user.getUserId()));
             return JsonResult.ok("修改成功");
         } else {
             return JsonResult.error("修改失败");

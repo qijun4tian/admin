@@ -1,17 +1,21 @@
 package com.zy.admin.system.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.security.web.session.InvalidSessionStrategy;
 import org.springframework.security.web.session.SessionInformationExpiredStrategy;
 
@@ -47,6 +51,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 	
 	
 	
+	
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
@@ -74,6 +80,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		  .sessionManagement()
 		  .invalidSessionStrategy(invalidSessionStrategy)
 		  .maximumSessions(shzProperties.getSecurity().getSession().getMaximumSessions())
+		  .sessionRegistry(getSessionRegistry())
 		  .maxSessionsPreventsLogin(shzProperties.getSecurity().getSession().isMaxSessionsPreventsLogin())
 		  .expiredSessionStrategy(sessionInformationExpiredStrategy)
 		.and()
@@ -90,7 +97,19 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
+    @Bean
+    public SessionRegistry getSessionRegistry(){
+        SessionRegistry sessionRegistry=new SessionRegistryImpl();
+        return sessionRegistry;
+    }
 
+    
+    @Bean  
+    public ServletListenerRegistrationBean httpSessionEventPublisher() {  
+        ServletListenerRegistrationBean<HttpSessionEventPublisher> registration = new ServletListenerRegistrationBean<>();  
+        registration.setListener(new HttpSessionEventPublisher());  
+        return registration;  
+    }  
 
 	
 	

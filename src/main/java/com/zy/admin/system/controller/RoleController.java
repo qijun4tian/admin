@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,21 +18,25 @@ import com.zy.admin.system.model.Authorities;
 import com.zy.admin.system.model.Role;
 import com.zy.admin.system.service.AuthoritiesService;
 import com.zy.admin.system.service.RoleService;
+import com.zy.admin.system.service.UserService;
 import com.zy.admin.system.utils.StringUtil;
 import com.zy.admin.system.utils.results.JsonResult;
 import com.zy.admin.system.utils.results.PageResult;
 
 @Controller
 @RequestMapping("/system/role")
-public class RoleController {
+public class RoleController extends BaseController {
 	
+	private final UserService userService;
 	private final RoleService roleService;
 	private final AuthoritiesService authoritiesService;
 
-	public RoleController(RoleService roleService, AuthoritiesService authoritiesService) {
+	public RoleController(UserService userService, RoleService roleService, AuthoritiesService authoritiesService) {
+		this.userService = userService;
 		this.roleService = roleService;
 		this.authoritiesService = authoritiesService;
 	}
+
 
 
 
@@ -127,6 +130,7 @@ public class RoleController {
 			 return JsonResult.error("修改失败");
 		}
         if (authoritiesService.updateRoleAuth(roleId,list)) {
+        	userService.selectByRoleId(roleId).forEach(x -> invalidateSession(x));
             return JsonResult.ok("修改成功");
         }
         return JsonResult.error("修改失败");
