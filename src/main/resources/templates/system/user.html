@@ -88,13 +88,18 @@
                     layer.confirm('确定重置此用户的密码吗？', function (i) {
                         layer.close(i);
                         layer.load(2);
-                        $.post('/system/user/restPsw', {
+                        admin.go('/system/user/restPsw', {
                             userId: obj.data.userId
                         }, function (data) {
+                        	console.log(data.code);
                             layer.closeAll('loading');
                             if (data.code == 200) {
                                 layer.msg(data.msg, {icon: 1});
-                            } else {
+                            }else if(data.code == 401){
+                            	layer.msg(data.msg, {icon: 2, time: 1500}, function () {location.replace('/login'); }, 1000);
+                            	 return;
+                            }
+                            else {
                                 layer.msg(data.msg, {icon: 2});
                             }
                         });
@@ -125,7 +130,7 @@
             // 修改user状态
             form.on('switch(user-tpl-state)', function (obj) {
                 layer.load(2);
-                $.post('/system/user/updateState', {
+                admin.go('/system/user/updateState', {
                     userId: obj.elem.value,
                     state: obj.elem.checked ? 0 : 1
                 }, function (data) {
@@ -133,7 +138,10 @@
                     if (data.code == 200) {
                         layer.msg(data.msg, {icon: 1});
                         //table.reload('table-user', {});
-                    } else {
+                    }else if(data.code == 401){
+                    	layer.msg(data.msg, {icon: 2, time: 1500}, function () {location.replace('/login'); }, 1000);
+                   	 return;
+                   } else {
                         layer.msg(data.msg, {icon: 2});
                         $(obj.elem).prop('checked', !obj.elem.checked);
                         form.render('checkbox');

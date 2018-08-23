@@ -125,14 +125,17 @@
             } else if (layEvent === 'del') { 
                 layer.confirm('确定删除此权限吗？', function () {
                     layer.load(2);
-                    $.post('/system/authorities/delete', {
+                    admin.go('/system/authorities/delete', {
                         authorityId: obj.data.authorityId
                     }, function (data) {
                         layer.closeAll('loading');
                         if (data.code == 200) {
                             layer.msg(data.msg, {icon: 1});
                             renderTable();
-                        } else {
+                        }else if(data.code == 401){
+                        	layer.msg(data.msg, {icon: 2, time: 1500}, function () {location.replace('/login'); }, 1000);
+                          	 return;
+                          } else {
                             layer.msg(data.msg, {icon: 2});
                         }
                     });

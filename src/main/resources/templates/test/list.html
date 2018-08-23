@@ -109,14 +109,17 @@
                 layer.confirm('确定要删除吗？', function (i) {
                     layer.close(i);
                     layer.load(2);
-                    $.post('/test/delete', {
+                    admin.go('/test/delete', {
                         id: obj.data.id
                     }, function (data) {
                         layer.closeAll('loading');
                         if (data.code == 200) {
                             layer.msg(data.msg, {icon: 1});
                             table.reload('test-table', {});
-                        } else {
+                        }else if(data.code == 401){
+                        	layer.msg(data.msg, {icon: 2, time: 1500}, function () {location.replace('/login'); }, 1000);
+                         	 return;
+                         } else {
                             layer.msg(data.msg, {icon: 2});
                         }
                     });

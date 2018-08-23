@@ -93,13 +93,16 @@
         // 表单提交事件
         form.on('submit(role-form-submit)', function (data) {
             layer.load(2);
-            $.post(formUrl, data.field, function (data) {
+            admin.go(formUrl, data.field, function (data) {
                 layer.closeAll('loading');
                 if (data.code == 200) {
                     layer.closeAll('page');
                     layer.msg(data.msg, {icon: 1});
                     table.reload('role-table');
-                } else {
+                }else if(data.code == 401){
+                	layer.msg(data.msg, {icon: 2, time: 1500}, function () {location.replace('/login'); }, 1000);
+                 	 return;
+                 } else {
                     layer.msg(data.msg, {icon: 2});
                 }
             });
@@ -137,14 +140,17 @@
             } else if (obj.event === 'del') { //删除
                 layer.confirm('确定要删除吗？', function () {
                     layer.load(2);
-                    $.post('/system/role/delete', {
+                    admin.go('/system/role/delete', {
                         roleId: obj.data.roleId
                     }, function (data) {
                         layer.closeAll('loading');
                         if (data.code == 200) {
                             layer.msg(data.msg, {icon: 1});
                             obj.del();
-                        } else {
+                        }else if(data.code == 401){
+                        	layer.msg(data.msg, {icon: 2, time: 1500}, function () {location.replace('/login'); }, 1000);
+                         	 return;
+                         } else {
                             layer.msg(data.msg, {icon: 2});
                         }
                     });
@@ -181,9 +187,13 @@
                             simpleData: {enable: true}
                         }
                     };
-                    $.get('/system/role/authTree', {
+                    admin.dgo('/system/role/authTree', {
                         roleId: roleId
                     }, function (data) {
+                    	 if(data.code == 401){
+                        	layer.msg(data.msg, {icon: 2, time: 1500}, function () {location.replace('/login'); }, 1000);
+                          	 return;
+                          }
                         $.fn.zTree.init($('#treeAuth'), setting, data);
                         layer.closeAll('loading');
                     }, 'json');
@@ -196,7 +206,7 @@
                     for (var i = 0; i < nodes.length; i++) {
                         ids[i] = nodes[i].id;
                     }
-                    $.post('/system/role/updateRoleAuth', {
+                    admin.go('/system/role/updateRoleAuth', {
                         roleId: roleId,
                         authIds: JSON.stringify(ids)
                     }, function (data) {
@@ -204,7 +214,10 @@
                         if (200 == data.code) {
                             layer.msg(data.msg, {icon: 1});
                             layer.close(index);
-                        } else {
+                        }else if(data.code == 401){
+                        	layer.msg(data.msg, {icon: 2, time: 1500}, function () {location.replace('/login'); }, 1000);
+                          	 return;
+                          } else {
                             layer.msg(data.msg, {icon: 2});
                         }
                     }, 'json');

@@ -88,6 +88,27 @@ layui.define(['layer'], function (exports) {
             };
             return layer.open(param);
         },
+        
+        go:function(url,data,success){
+        	  $.ajax({
+        		  url: url,
+        		  data: data,
+        		  async: false,
+        		  dataType: 'json',
+        		  type: 'post',
+        		   success: success
+        	  })
+        },
+        dgo:function(url,data,success){
+      	  $.ajax({
+      		  url: url,
+      		  data: data,
+      		  async: false,
+      		  dataType: 'json',
+      		  type: 'get',
+      		   success: success
+      	  })
+      },
         // 封装ajax请求，返回数据类型为json
         req: function (url, data, success, method) {
             admin.ajax({
