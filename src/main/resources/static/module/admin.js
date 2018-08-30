@@ -114,6 +114,7 @@ layui.define(['layer'], function (exports) {
             admin.ajax({
                 url: url,
                 data: data,
+                async: false,
                 type: method,
                 dataType: 'json',
                 success: success
