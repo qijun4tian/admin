@@ -52,7 +52,7 @@ server:
   port: 9999
   servlet:
     session: 
-      timeout: 1800
+      timeout: 300
   
 logging:
   path: ./log
