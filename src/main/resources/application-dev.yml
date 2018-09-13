@@ -48,6 +48,13 @@ mybatis-plus:
     db-column-underline: true
     refresh-mapper: true
     id-type: 0
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,beans,mappings
+      base-path: /monitor
 
 server:
   port: 8060
