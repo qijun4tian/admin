@@ -12,7 +12,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 
 @Configuration
-public class ExecutorConfiguration extends AsyncConfigurerSupport {
+public class ExecutorConfig extends AsyncConfigurerSupport {
 
 	@Override
 	@Bean(name = "zyTaskExecutor")

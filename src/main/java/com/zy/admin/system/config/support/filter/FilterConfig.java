@@ -1,4 +1,4 @@
-package com.zy.admin.system.config;
+package com.zy.admin.system.config.support.filter;
 
 import org.springframework.context.annotation.Configuration;
 

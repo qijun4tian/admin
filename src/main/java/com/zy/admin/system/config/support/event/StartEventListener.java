@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class StartEventListener {
 
 	@Async
-	@Order
+	@Order(1)
 	@EventListener(WebServerInitializedEvent.class)
 	public void afterStart(WebServerInitializedEvent event) {
 		String[] profiles = event.getApplicationContext().getEnvironment().getActiveProfiles();

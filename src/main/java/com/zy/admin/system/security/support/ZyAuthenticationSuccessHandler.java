@@ -13,12 +13,14 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zy.admin.system.config.support.event.LoginRecordEvent;
 import com.zy.admin.system.model.LoginRecord;
-import com.zy.admin.system.service.LoginRecordService;
+import com.zy.admin.system.utils.SpringUtils;
 import com.zy.admin.system.utils.UserAgentGetter;
 import com.zy.admin.system.utils.results.JsonResult;
 
 import lombok.extern.slf4j.Slf4j;
+
 
 @Component
 @Slf4j
@@ -32,8 +34,6 @@ public class ZyAuthenticationSuccessHandler  extends SimpleUrlAuthenticationSucc
 	@Autowired
 	private ObjectMapper objectMapper;
 	
-	@Autowired
-	private LoginRecordService loginRecordService;
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -58,7 +58,8 @@ public class ZyAuthenticationSuccessHandler  extends SimpleUrlAuthenticationSucc
         loginRecord.setDevice(agentGetter.getDevice());
         loginRecord.setBrowserType(agentGetter.getBrowser());
         loginRecord.setIpAddress(agentGetter.getIpAddr());
-        loginRecordService.add(loginRecord);
+      // 发送 spring event 事件
+        SpringUtils.publishEvent(new LoginRecordEvent(loginRecord));
     }
 
 }
