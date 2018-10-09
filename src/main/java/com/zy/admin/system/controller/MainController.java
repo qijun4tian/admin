@@ -7,12 +7,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.zy.admin.system.config.support.properties.ShzProperties;
 import com.zy.admin.system.model.Authorities;
 import com.zy.admin.system.security.support.SecurityUtils;
 import com.zy.admin.system.service.AuthoritiesService;
@@ -27,9 +29,13 @@ import com.zy.admin.system.utils.StringUtil;
 public class MainController extends BaseController {
 
 	private final AuthoritiesService authoritiesService;
+	
+	@Autowired
+	static ShzProperties shzProperties;
 
-	public MainController(AuthoritiesService authoritiesService) {
+	public MainController(AuthoritiesService authoritiesService,ShzProperties shzProperties ) {
 		this.authoritiesService = authoritiesService;
+		MainController.shzProperties = shzProperties;
 	}
 
 	/**
@@ -52,7 +58,7 @@ public class MainController extends BaseController {
 	@GetMapping("/me")
 	@ResponseBody
 	public Object me() {
-		return SecurityUtils.getAuthentication();
+		return shzProperties.getSecurity().getImageCode().getHeight();
 	}
 
     @RequestMapping("/iframe")

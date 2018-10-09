@@ -3,6 +3,7 @@ package com.zy.admin.system.config.support.event;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.boot.web.context.WebServerInitializedEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -22,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class StartEventListener {
 
 	@Async
-	@Order(1)
+	@Order(Ordered.LOWEST_PRECEDENCE)
 	@EventListener(WebServerInitializedEvent.class)
 	public void afterStart(WebServerInitializedEvent event) {
 		String[] profiles = event.getApplicationContext().getEnvironment().getActiveProfiles();

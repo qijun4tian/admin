@@ -57,7 +57,7 @@ management:
       base-path: /monitor
 
 server:
-  port: 8060
+  port: 8059
   servlet:
     session: 
       timeout: 1800
