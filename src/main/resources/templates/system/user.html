@@ -39,13 +39,15 @@
            {{d.state==0?'checked':''}}/>
 </script>
 <script>
-    layui.use(['form', 'table', 'util', 'admin', 'element'], function () {
+    layui.use(['form', 'table','layer', 'util', 'admin', 'element'], function () {
             var form = layui.form;
             var table = layui.table;
             var layer = layui.layer;
             var util = layui.util;
             var admin = layui.admin;
             var element = layui.element;
+            
+            form.render('select');
 
          // 渲染表格
             table.render({
