@@ -72,6 +72,6 @@ shz:
   security:
     imageCode:
       length: 4 
-      open: false
+      open: true
  
     

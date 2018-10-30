@@ -61,10 +61,10 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements
 		// TODO Auto-generated method stub
 		super.afterPropertiesSet();
 		urlMap.put("/authentication/form", ValidateCodeType.IMAGE);
-		addUrlToMap("/user/*",ValidateCodeType.IMAGE);
+		//addUrlToMap("/user/*",ValidateCodeType.IMAGE);
 
-		urlMap.put("/authentication/mobile", ValidateCodeType.SMS);
-		addUrlToMap("/user/*",ValidateCodeType.SMS);
+		//urlMap.put("/authentication/mobile", ValidateCodeType.SMS);
+		//addUrlToMap("/user/*",ValidateCodeType.SMS);
 	}
 
 	/**

@@ -58,7 +58,7 @@ public class MainController extends BaseController {
 	@GetMapping("/me")
 	@ResponseBody
 	public Object me() {
-		return shzProperties.getSecurity().getImageCode().getHeight();
+		return getLoginUser();
 	}
 
     @RequestMapping("/iframe")
