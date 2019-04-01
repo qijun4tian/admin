@@ -19,6 +19,9 @@ import com.zy.admin.system.model.User;
 import com.zy.admin.system.repository.UserMapper;
 import com.zy.admin.system.service.AuthoritiesService;
 import com.zy.admin.system.utils.StringUtil;
+
+import javax.annotation.Resource;
+
 /**
  * 
  * @author zy 
@@ -27,9 +30,9 @@ import com.zy.admin.system.utils.StringUtil;
 @Component
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
-    @Autowired
+    @Resource
     private AuthoritiesService authoritiesService;
 
     @Override

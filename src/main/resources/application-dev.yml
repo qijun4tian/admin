@@ -60,7 +60,7 @@ server:
   port: 8059
   servlet:
     session: 
-      timeout: 1800
+      timeout: 1800s
   
 logging:
   path: ./log
